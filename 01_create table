@@ -1,0 +1,12 @@
+create table publisher
+(
+	publisher_id integer primary key,
+	org_name varchar(128) not null,
+	address text not null
+);
+create table book
+(
+	book_id integer primary key,
+	title text not null,
+	isbn varchar(32) not null
+)

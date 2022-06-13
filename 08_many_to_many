@@ -1,0 +1,47 @@
+drop table if exists book;
+drop table if exists author;
+
+create table book
+(
+	book_id int primary key,
+	title text not null,
+	isbn text not null
+);
+
+create table author
+(
+	author_id int primary key,
+	full_name text not null,
+	rating real
+);
+
+create table book_author
+(
+	book_id int references book(book_id),
+	author_id int references author(author_id),
+	
+	constraint book_author_pkey primary key (book_id, author_id) -- composite key
+);
+
+insert into book
+values
+(1, 'Book for Dumnies', '123456'),
+(2, 'Book for Smart Guys', '7890123'),
+(3, 'Book for Happy People', '4567890'),
+(4, 'Book for Unhappy People', '1234567');
+
+insert into author
+values
+(1, 'Bob', 4.5),
+(2, 'Alice', 4.0),
+(3, 'John', 4.7);
+
+insert into book_author
+values
+(1, 1),
+(2, 1),
+(3, 1),
+(3, 2),
+(4, 1),
+(4, 2),
+(4, 3);

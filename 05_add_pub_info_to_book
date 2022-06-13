@@ -1,0 +1,6 @@
+alter table book
+add column fk_publisher_id integer;
+
+alter table book
+add constraint fk_book_publisher 
+foreign key (fk_publisher_id) references publisher(publisher_id);
