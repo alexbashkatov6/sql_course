@@ -1,0 +1,2 @@
+ALTER TABLE book
+ADD CONSTRAINT FK_books_publisher FOREIGN KEY(publisher_id) REFERENCES publisher(publisher_id);

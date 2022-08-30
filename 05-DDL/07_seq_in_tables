@@ -1,0 +1,25 @@
+# eq to serial type:
+
+CREATE TABLE book
+(
+	book_id int NOT NULL,
+	...
+)
+
+CREATE SEQUENCE IF NOT EXISTS book_book_id_seq
+START WITH 1 OWNED BY book.book_id;
+
+ALTER TABLE book
+ALTER COLUMN book_id SET DEFAULT nextval('book_book_id_seq')
+
+# ! serial - counter not synchronised with reality
+
+CREATE TABLE book
+(
+	book_id int GENERATED ALWAYS AS INDENTITY NOT NULL,
+	...
+)
+
+INSERT INTO book
+OVERRIDING SYSTEM VALUE
+VALUES ..

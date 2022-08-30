@@ -1,0 +1,25 @@
+create function filt_even(variadic numbers int[]) returns setof int as $$
+begin
+	for counter in 1..array_upper(numbers, 1)
+		loop 
+			continue when counter % 2 != 0;
+			return next counter;
+		end loop;
+end
+$$ language plpgsql;
+
+select * from filt_even(1, 2, 3, 4)
+
+create function filt_even2(variadic numbers int[]) returns setof int as $$
+declare
+	counter int;
+begin
+	foreach counter in array numbers
+		loop 
+			continue when counter % 2 != 0;
+			return next counter;
+		end loop;
+end
+$$ language plpgsql;
+
+select * from filt_even2(1, 2, 3, 4)

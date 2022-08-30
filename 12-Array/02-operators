@@ -1,0 +1,5 @@
+select array[1, 2, 3, 4] = array[1, 2, 3, 4]
+select array[1, 2, 4, 4] > array[1, 2, 3, 4]
+select array[1, 2, 3, 4] @> array[1, 2, 3]
+select array[1, 2, 3, 4] <@ array[1, 2, 3]
+select array[1, 2, 3] && array[4, 5, 3]

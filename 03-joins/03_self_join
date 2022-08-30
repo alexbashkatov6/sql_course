@@ -1,0 +1,22 @@
+CREATE TABLE employee (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR (255) NOT NULL,
+    last_name VARCHAR (255) NOT NULL,
+    manager_id INT,
+    FOREIGN KEY (manager_id) REFERENCES employee (employee_id)
+);
+
+INSERT INTO employee VALUES (1, 'Windy', 'Mays', NULL);
+INSERT INTO employee VALUES (2, 'Ava', 'Christensen', 1);
+INSERT INTO employee VALUES (3, 'Kassan', 'Conner', 1);
+INSERT INTO employee VALUES (4, 'Anna', 'Reeves', 2);
+INSERT INTO employee VALUES (5, 'Sau', 'Norman', 2);
+INSERT INTO employee VALUES (6, 'Kelsea', 'Hays', 3);
+INSERT INTO employee VALUES (7, 'Tory', 'Goff', 3);
+INSERT INTO employee VALUES (8, 'Salley', 'Lester', 3);
+
+SELECT e.first_name || ' ' || e.last_name AS employee,
+    m.first_name || ' ' || m.last_name AS manager
+FROM employee e
+LEFT JOIN employee m ON m.employee_id = e.manager_id 
+ORDER BY manager

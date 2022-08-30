@@ -1,0 +1,7 @@
+SELECT *
+FROM customers
+WHERE country IN ('USA', 'Canada');
+
+SELECT *
+FROM customers
+WHERE country NOT IN ('USA', 'Canada');

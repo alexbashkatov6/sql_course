@@ -1,0 +1,29 @@
+create domain text_no_space_null as text not null check(value~'^(?!\s*$).+');
+
+create table agent(
+	first_name text_no_space_null,
+	last_name text_no_space_null
+);
+
+insert into agent 
+values ('bob', 'taylor');
+
+select * from agent;
+
+insert into agent 
+values ('', 'taylor');
+
+insert into agent 
+values (NULL, 'taylor');
+
+insert into agent 
+values ('   ', 'taylor');
+
+insert into agent 
+values ('bob june', 'taylor');
+
+alter domain text_no_space_null add constraint length32 check (length(value)<=32) not valid;
+alter domain text_no_space_null validate constraint length32; -- existing data check
+
+insert into agent 
+values ('bob june sdfrsagreg sggrsgfgfsfgfgghfghdfgrdgdfgsgfhgf', 'taylor');

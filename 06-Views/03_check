@@ -1,0 +1,15 @@
+CREATE OR REPLACE VIEW heavy_orders AS
+SELECT *
+FROM orders
+WHERE freight > 100
+WITH LOCAL CHECK OPTION;
+
+CREATE OR REPLACE VIEW heavy_orders AS
+SELECT *
+FROM orders
+WHERE freight > 100
+WITH CASCADED CHECK OPTION;
+
+SELECT * 
+FROM heavy_orders
+ORDER BY freight;

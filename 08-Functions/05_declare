@@ -1,0 +1,11 @@
+DROP FUNCTION IF EXISTS get_square;
+CREATE OR REPLACE FUNCTION get_square(ab real, bc real, ac real) RETURNS real AS $$
+DECLARE
+	perimeter real;
+BEGIN
+	perimeter = (ab + ac+ bc) / 2;
+	return sqrt(perimeter * (perimeter-ab) * (perimeter-bc) * (perimeter-ac));
+END
+$$ LANGUAGE plpgsql;
+
+SELECT get_square(3, 4, 5);

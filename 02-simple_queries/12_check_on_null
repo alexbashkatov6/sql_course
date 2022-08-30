@@ -1,0 +1,7 @@
+SELECT *
+FROM orders
+WHERE ship_region IS NULL;
+
+SELECT *
+FROM orders
+WHERE ship_region IS NOT NULL;

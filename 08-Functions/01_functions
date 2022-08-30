@@ -1,0 +1,34 @@
+select *
+into tmp_customers
+from customers;
+
+select *
+from tmp_customers;
+
+drop table tmp_customers;
+
+update tmp_customers
+set region = 'unknown'
+where region is null;
+
+create or replace function fix_customer_region() RETURNS void as $$
+	update tmp_customers
+	set region = 'unknown'
+	where region is null
+$$ language sql;
+
+select fix_customer_region();
+
+CREATE OR REPLACE FUNCTION get_total_number_of_goods() RETURNS bigint AS $$
+	SELECT SUM(units_in_stock)
+	FROM products
+$$ LANGUAGE SQL;
+
+SELECT get_total_number_of_goods() AS total_goods;
+
+CREATE OR REPLACE FUNCTION get_avg_price() RETURNS float8 AS $$
+	SELECT AVG(unit_price)
+	FROM products
+$$ LANGUAGE SQL;
+
+SELECT get_avg_price() AS avg_price;

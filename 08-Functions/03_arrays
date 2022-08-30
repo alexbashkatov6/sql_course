@@ -1,0 +1,60 @@
+CREATE OR REPLACE FUNCTION get_average_prices_by_prod_categories() 
+		RETURNS SETOF double precision AS $$
+	SELECT AVG(unit_price)
+	FROM products
+	GROUP BY category_id
+$$ LANGUAGE SQL;
+
+SELECT * 
+FROM get_average_prices_by_prod_categories() AS average_prices;
+
+SELECT * 
+FROM products
+
+CREATE OR REPLACE FUNCTION get_sum_avg_prices_by_prod_categories(OUT sum_price real, OUT avg_price float8) 
+		RETURNS SETOF RECORD AS $$
+	SELECT SUM(unit_price), AVG(unit_price)
+	FROM products
+	GROUP BY category_id
+$$ LANGUAGE SQL;
+
+SELECT sum_price, avg_price 
+FROM get_sum_avg_prices_by_prod_categories()
+
+SELECT sum_price AS sum_of, avg_price AS in_avg 
+FROM get_sum_avg_prices_by_prod_categories()
+
+-- Deprecated:
+CREATE OR REPLACE FUNCTION get_sum_avg_prices_by_prod_categories_depr() 
+		RETURNS SETOF RECORD AS $$
+	SELECT SUM(unit_price), AVG(unit_price)
+	FROM products
+	GROUP BY category_id
+$$ LANGUAGE SQL;
+
+SELECT *
+FROM get_sum_avg_prices_by_prod_categories_depr() AS (sum_price real, avg_price float8)
+
+CREATE OR REPLACE FUNCTION get_customers_by_country(customer_country varchar) 
+		RETURNS TABLE(char_code char, company_name varchar) AS $$
+	SELECT customer_id, company_name
+	FROM customers
+	WHERE country = customer_country
+$$ LANGUAGE SQL;
+
+SELECT * FROM get_customers_by_country('USA');
+SELECT company_name FROM get_customers_by_country('USA');
+SELECT char_code, company_name FROM get_customers_by_country('USA');
+
+CREATE OR REPLACE FUNCTION get_customers_by_country_table(customer_country varchar) 
+		RETURNS SETOF customers AS $$
+		
+	-- won't work SELECT company_name contact_name
+	SELECT *
+	FROM customers
+	WHERE country = customer_country
+$$ LANGUAGE SQL;
+
+SELECT * FROM get_customers_by_country_table('USA');
+SELECT company_name FROM get_customers_by_country_table('USA');
+SELECT customer_id, company_name FROM get_customers_by_country_table('USA');

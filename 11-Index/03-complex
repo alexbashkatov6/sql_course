@@ -1,0 +1,13 @@
+create extension pg_trgm;
+
+create index idx_perf_test_reason on perf_test using gin(reason gin_trgm_ops);
+
+explain analyze
+select * 
+from perf_test
+where reason like '%ab%';
+
+explain analyze
+select * 
+from perf_test
+where reason like '%dfe%';

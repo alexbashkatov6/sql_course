@@ -1,0 +1,12 @@
+UPDATE author
+SET full_name = 'Elias', rating = 5
+WHERE author)id = 1;
+
+DELETE FROM author
+WHERE rating < 4.5;
+
+DELETE FROM author; # as truncate but with logs
+
+INSERT INTO book (title, isbn, publisher_id)
+VALUES ('title', 'isbn', 3)
+RETURNING book_id; # with printing what was inserted

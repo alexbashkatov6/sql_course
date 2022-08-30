@@ -1,0 +1,19 @@
+INSERT INTO faculty(faculty_name, rate)
+VALUES
+('faculty_1', 1),
+('faculty_2', 2),
+('faculty_3', 3);
+
+TRUNCATE TABLE faculty RESTART IDENTITY; # - restart auto-inc
+
+# if table best_authors not exists
+SELECT *
+INTO best_authors
+FROM author
+WWHERE rating >= 5;
+
+# else:
+INSERT INTO best_authors
+SELECT *
+FROM author
+WWHERE rating >= 5;

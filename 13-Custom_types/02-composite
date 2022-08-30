@@ -1,0 +1,39 @@
+CREATE OR REPLACE FUNCTION get_price_boundaries(OUT max_price real, OUT min_price real) AS $$
+	SELECT MAX(unit_price), MIN(unit_price)
+	FROM products
+$$ LANGUAGE SQL;
+
+SELECT * from get_price_boundaries();
+
+create type price_bounds as (
+	max_price real,
+	min_price real
+);
+
+CREATE OR REPLACE FUNCTION get_price_boundaries2() RETURNS SETOF price_bounds AS $$
+	SELECT MAX(unit_price), MIN(unit_price)
+	FROM products
+$$ LANGUAGE SQL;
+
+SELECT * from get_price_boundaries2();
+
+create type complex as (
+	r float8,
+	i float8
+);
+
+create table math_calcs (
+	math_id serial,
+	val complex
+);
+
+insert into math_calcs(val)
+values
+(row(3.0, 4.0)),
+(row(2.0, 1.0));
+
+select * from math_calcs;
+
+select (val).r from math_calcs;
+select (math_calcs.val).r from math_calcs;
+select (math_calcs.val).* from math_calcs;

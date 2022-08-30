@@ -1,0 +1,3 @@
+SELECT *
+FROM orders
+WHERE freight BETWEEN 75 AND 150;

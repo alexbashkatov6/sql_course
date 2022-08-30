@@ -1,0 +1,9 @@
+CREATE FUNCTION return_ints() RETURNS SETOF int AS $$
+BEGIN
+	RETURN NEXT 1;
+	RETURN NEXT 2;
+	RETURN NEXT 3;
+END
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM return_ints();

@@ -1,0 +1,30 @@
+CREATE OR REPLACE FUNCTION type_testing(money_val float8) RETURNS void AS
+$$
+BEGIN
+	RAISE NOTICE 'ran %', money_val;
+END
+$$ LANGUAGE plpgsql;
+
+SELECT type_testing(0.5);
+SELECT type_testing(0.5::float4);
+SELECT type_testing(1);
+
+DROP FUNCTION IF EXISTS type_testing2(float8);
+CREATE OR REPLACE FUNCTION type_testing2(money_val int) RETURNS void AS
+$$
+BEGIN
+	RAISE NOTICE 'ran %', money_val;
+END
+$$ LANGUAGE plpgsql;
+
+SELECT type_testing2(1);
+SELECT type_testing2(0.5);
+SELECT type_testing2(0.5::int);
+SELECT type_testing2(0.4::int);
+SELECT type_testing2(CAST(0.5 AS int));
+SELECT type_testing2(CAST('12' AS int));
+SELECT type_testing2('0.4'::numeric::int);
+
+SELECT CAST(50 AS bigint) AS fact;
+SELECT 'abc' || 1;
+SELECT ' 10 ' = 10;

@@ -1,0 +1,18 @@
+create index idx_perf_test_annotation on perf_test(annotation);
+
+explain
+select * 
+from perf_test
+where annotation like 'AB%';
+
+explain
+select * 
+from perf_test
+where lower(annotation) like 'ab%';
+
+create index idx_perf_test_annotation_lower on perf_test(lower(annotation));
+
+explain
+select * 
+from perf_test
+where lower(annotation) like 'ab%';

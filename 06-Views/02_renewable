@@ -1,0 +1,8 @@
+CREATE OR REPLACE VIEW heavy_orders AS
+SELECT *
+FROM orders
+WHERE freight > 100;
+
+SELECT * 
+FROM heavy_orders
+ORDER BY freight;
