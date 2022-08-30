@@ -1,0 +1,9 @@
+psql -U postgres
+\q  # exit
+psql northwind postgres
+\dt  # table list
+\d categoties  # table info
+
+# encoding trobles
+\! chcp 1251  # cmd encoding
+SET client_encoding TO 'UTF8';  # for * symbol understanding

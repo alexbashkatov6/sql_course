@@ -1,0 +1,11 @@
+select company_name
+from suppliers
+where country in (select country from customers);
+
+with customer_countries as
+(
+	select country from customers
+)
+select company_name
+from suppliers
+where country in (select * from customer_countries);

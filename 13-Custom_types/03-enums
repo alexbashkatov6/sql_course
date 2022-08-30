@@ -1,0 +1,3 @@
+create type chess_title as enum ('first', 'second', 'third');
+
+select enum_range(null::chess_title);

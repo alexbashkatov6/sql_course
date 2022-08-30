@@ -1,0 +1,23 @@
+drop table patients;
+create table patients (
+	patient_id int PRIMARY KEY,
+	sex text,
+	birth_year int,
+	country text,
+	region text,
+	disease int,
+	patient_group text,
+	infection_reason text,
+	infection_order int,
+	infected_by int,
+	contact_number int,
+	confirmed_date date,
+	released_date date,
+	deceased_date date,
+	current_state text
+);
+
+select * from patients;
+
+# in cmd (already connected to db):
+\copy patients from 'C:\Users\alexb\postgre_course_scripts\16-import_csv\patient.csv' DELIMITER ',' CSV HEADER;

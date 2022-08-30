@@ -1,0 +1,2 @@
+win+R
+systempropertiesadvanced

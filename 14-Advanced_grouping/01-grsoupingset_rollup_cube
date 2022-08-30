@@ -1,0 +1,41 @@
+select *
+from products;
+
+select supplier_id, sum(units_in_stock)
+from products
+group by supplier_id
+order by supplier_id;
+
+select supplier_id, category_id, sum(units_in_stock)
+from products
+group by supplier_id, category_id
+order by supplier_id;
+
+select supplier_id, category_id, sum(units_in_stock)
+from products
+group by grouping sets ((supplier_id), (supplier_id, category_id))
+order by supplier_id, category_id NULLS first;
+
+select supplier_id, sum(units_in_stock)
+from products
+group by rollup(supplier_id);
+
+select supplier_id, category_id, sum(units_in_stock)
+from products
+group by rollup(supplier_id, category_id)
+order by supplier_id, category_id NULLS first;
+
+select supplier_id, category_id, sum(units_in_stock)
+from products
+group by CUBE(supplier_id, category_id)
+order by supplier_id, category_id NULLS first;
+
+select supplier_id, category_id, reorder_level, sum(units_in_stock)
+from products
+group by rollup(supplier_id, category_id, reorder_level)
+order by supplier_id, category_id, reorder_level NULLS first;
+
+select supplier_id, category_id, reorder_level, sum(units_in_stock)
+from products
+group by CUBE(supplier_id, category_id, reorder_level)
+order by supplier_id, category_id, reorder_level NULLS first;
